@@ -284,7 +284,21 @@ function prevImg(){
     currentIndex=(currentIndex-1+sets[currentSet].length)%sets[currentSet].length;
     document.getElementById("lightbox-img").src=sets[currentSet][currentIndex];
 }
+// ESC zatvara
+document.addEventListener("keydown",function(e){
+    if(document.getElementById("lightbox").style.display==="flex"){
+        if(e.key==="Escape"){
+            document.getElementById("lightbox").style.display="none";
+        }
+    }
+});
 
+// klik sa strane (pozadina) zatvara
+document.getElementById("lightbox").addEventListener("click",function(e){
+    if(e.target.id==="lightbox"){
+        this.style.display="none";
+    }
+});
 </script>
 
 </body>
