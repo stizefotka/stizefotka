@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="sr">
 <head>
 <meta charset="UTF-8">
@@ -17,7 +17,6 @@ body{
     color:white;
 }
 
-/* HEADER */
 header{text-align:center;padding:20px;}
 header img{
     width:160px;
@@ -28,7 +27,6 @@ h1{
     text-shadow:0 0 15px #ff0055;
 }
 
-/* SOCIAL */
 .social-bar{
     display:flex;
     justify-content:center;
@@ -40,67 +38,6 @@ h1{
     filter:drop-shadow(0 0 10px #ff0055);
 }
 
-/* BOOKING */
-.booking-inline{
-    padding:30px 20px;
-    display:flex;
-    justify-content:center;
-}
-
-.booking-form-inline{
-    width:100%;
-    max-width:450px;
-    background:rgba(20,0,25,0.95);
-    padding:25px 18px;
-    border-radius:22px;
-    border:2px solid #ff0055;
-    box-shadow:0 0 35px rgba(255,0,85,0.6);
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-}
-
-.booking-form-inline input{
-    padding:14px;
-    border-radius:14px;
-    border:1px solid rgba(255,0,85,0.5);
-    background:#1a001f;
-    color:white;
-}
-
-.booking-form-inline button{
-    padding:15px;
-    border:none;
-    border-radius:16px;
-    background:#ff0055;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-#form-status{
-    text-align:center;
-    font-size:14px;
-}
-
-@media(min-width:992px){
-    .booking-form-inline{
-        max-width:1100px;
-        flex-direction:row;
-        align-items:center;
-        gap:15px;
-        padding:20px;
-    }
-    .booking-form-inline input{
-        flex:1;
-        max-width:220px;
-    }
-    .booking-form-inline button{
-        flex:0 0 160px;
-    }
-}
-
-/* GALLERY */
 .gallery{
     max-width:1100px;
     margin:60px auto;
@@ -133,8 +70,7 @@ h1{
     background:rgba(0,0,0,0.7);
     color:#ff0055;
     font-weight:bold;
-    border-bottom-left-radius:20px;
-    border-bottom-right-radius:20px;
+    border-radius:0 0 20px 20px;
 }
 
 /* LIGHTBOX */
@@ -164,7 +100,6 @@ h1{
     border:none;
     padding:8px 14px;
     cursor:pointer;
-    border-radius:8px;
 }
 
 #prev{left:40px;}
@@ -191,32 +126,30 @@ footer{
     <a href="https://www.tiktok.com/@stize.fotka"><img src="tiktok.png"></a>
 </div>
 
-<section class="booking-inline">
-<form id="booking-form"
-      class="booking-form-inline"
-      action="https://formspree.io/f/xwvnnljd"
-      method="POST">
-
-    <input type="text" name="ime" placeholder="Ime" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="tel" name="telefon" placeholder="Broj telefona" required>
-    <input type="date" name="datum" required>
-
-    <button id="booking-button">Rezerviši</button>
-    <p id="form-status"></p>
-</form>
-</section>
-
 <div class="gallery">
 
+    <!-- MLADJA -->
     <div class="gallery-cover" onclick="openSet(0)">
         <img id="cover0" src="mladja1.jpeg">
         <div class="cover-title">Mladja Photoshoot</div>
     </div>
 
+    <!-- AP -->
     <div class="gallery-cover" onclick="openSet(1)">
         <img id="cover1" src="ap1.jpeg">
         <div class="cover-title">AP Photoshoot</div>
+    </div>
+
+    <!-- MILOS1 -->
+    <div class="gallery-cover" onclick="openSet(2)">
+        <img id="cover2" src="milos1/b1.jpg">
+        <div class="cover-title">Kickbox Photoshoot</div>
+    </div>
+
+    <!-- MILOS2 -->
+    <div class="gallery-cover" onclick="openSet(3)">
+        <img id="cover3" src="milos2/c1.jpg">
+        <div class="cover-title">Kickbox Details</div>
     </div>
 
 </div>
@@ -232,6 +165,8 @@ footer{
 <script>
 
 const sets = [
+
+/* MLADJA */
 [
 "mladja1.jpeg",
 "mladja2.jpeg",
@@ -244,21 +179,56 @@ const sets = [
 "mladja9.jpeg",
 "mladja10.jpeg"
 ],
+
+/* AP */
 [
 "ap1.jpeg",
 "ap2.jpeg",
 "ap3.jpeg"
+],
+
+/* MILOS1 */
+[
+"milos1/b1.png",
+"milos1/b2.jepg",
+"milos1/b3.jepg",
+"milos1/b4.png",
+"milos1/b5.jpeg",
+"milos1/b6.png",
+"milos1/b77.jpeg",
+"milos1/b8.png",
+"milos1/b9.jpeg",
+"milos1/b10.png",
+"milos1/b11.png",
+"milos1/b12.png"
+],
+
+/* MILOS2 */
+[
+"milos2/c1.jpeg",
+"milos2/c2.jpeg",
+"milos2/c3.jpeg",
+"milos2/c4.jpeg",
+"milos2/c5.jpeg",
+"milos2/c6.jpeg",
+"milos2/c7.jpeg",
+"milos2/c8.jpeg",
+"milos2/c9.jpeg",
+"milos2/c10.jpeg"
+
 ]
+
 ];
 
 let currentSet = 0;
 let currentIndex = 0;
-let startX = 0;
 
-/* AUTO NASLOVNE */
+/* AUTO COVER */
 sets.forEach((set,index)=>{
     let coverIndex=0;
     const cover=document.getElementById("cover"+index);
+
+    if(!cover) return;
 
     setInterval(()=>{
         coverIndex=(coverIndex+1)%set.length;
@@ -283,32 +253,11 @@ function prevImg(){
     document.getElementById("lightbox-img").src=sets[currentSet][currentIndex];
 }
 
-function closeLightbox(){
-    document.getElementById("lightbox").style.display="none";
-}
-
 document.addEventListener("keydown",function(e){
     if(document.getElementById("lightbox").style.display==="flex"){
         if(e.key==="ArrowRight") nextImg();
         if(e.key==="ArrowLeft") prevImg();
-        if(e.key==="Escape") closeLightbox();
     }
-});
-
-const lightbox = document.getElementById("lightbox");
-
-lightbox.addEventListener("touchstart",e=>{
-    startX = e.touches[0].clientX;
-});
-
-lightbox.addEventListener("touchend",e=>{
-    let endX = e.changedTouches[0].clientX;
-    if(startX - endX > 50) nextImg();
-    if(endX - startX > 50) prevImg();
-});
-
-lightbox.addEventListener("click",function(e){
-    if(e.target.id==="lightbox") closeLightbox();
 });
 
 </script>
