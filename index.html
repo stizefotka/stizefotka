@@ -38,6 +38,62 @@ h1{
     filter:drop-shadow(0 0 10px #ff0055);
 }
 
+/* BOOKING */
+.booking-inline{
+    padding:30px 20px;
+    display:flex;
+    justify-content:center;
+}
+
+.booking-form-inline{
+    width:100%;
+    max-width:450px;
+    background:rgba(20,0,25,0.95);
+    padding:25px 18px;
+    border-radius:22px;
+    border:2px solid #ff0055;
+    box-shadow:0 0 35px rgba(255,0,85,0.6);
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.booking-form-inline input{
+    padding:14px;
+    border-radius:14px;
+    border:1px solid rgba(255,0,85,0.5);
+    background:#1a001f;
+    color:white;
+}
+
+.booking-form-inline button{
+    padding:15px;
+    border:none;
+    border-radius:16px;
+    background:#ff0055;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+@media(min-width:992px){
+    .booking-form-inline{
+        max-width:1100px;
+        flex-direction:row;
+        align-items:center;
+        gap:15px;
+        padding:20px;
+    }
+    .booking-form-inline input{
+        flex:1;
+        max-width:220px;
+    }
+    .booking-form-inline button{
+        flex:0 0 160px;
+    }
+}
+
+/* GALLERY */
 .gallery{
     max-width:1100px;
     margin:60px auto;
@@ -126,29 +182,40 @@ footer{
     <a href="https://www.tiktok.com/@stize.fotka"><img src="tiktok.png"></a>
 </div>
 
+<!-- VRACENE REZERVACIJE -->
+<section class="booking-inline">
+<form class="booking-form-inline"
+      action="https://formspree.io/f/xwvnnljd"
+      method="POST">
+
+    <input type="text" name="ime" placeholder="Ime" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="telefon" placeholder="Broj telefona" required>
+    <input type="date" name="datum" required>
+
+    <button>Rezerviši</button>
+</form>
+</section>
+
 <div class="gallery">
 
-    <!-- MLADJA -->
     <div class="gallery-cover" onclick="openSet(0)">
         <img id="cover0" src="mladja1.jpeg">
         <div class="cover-title">Mladja Photoshoot</div>
     </div>
 
-    <!-- AP -->
     <div class="gallery-cover" onclick="openSet(1)">
         <img id="cover1" src="ap1.jpeg">
         <div class="cover-title">AP Photoshoot</div>
     </div>
 
-    <!-- MILOS1 -->
     <div class="gallery-cover" onclick="openSet(2)">
         <img id="cover2" src="milos1/b1.jpg">
         <div class="cover-title">Kickbox Photoshoot</div>
     </div>
 
-    <!-- MILOS2 -->
     <div class="gallery-cover" onclick="openSet(3)">
-        <img id="cover3" src="milos2/c1.jpg">
+        <img id="cover3" src="milos2/c1.jpeg">
         <div class="cover-title">Kickbox Details</div>
     </div>
 
@@ -166,56 +233,24 @@ footer{
 
 const sets = [
 
-/* MLADJA */
 [
-"mladja1.jpeg",
-"mladja2.jpeg",
-"mladja3.jpeg",
-"mladja4.jpeg",
-"mladja5.jpeg",
-"mladja6.jpeg",
-"mladja7.jpeg",
-"mladja8.jpeg",
-"mladja9.jpeg",
-"mladja10.jpeg"
+"mladja1.jpeg","mladja2.jpeg","mladja3.jpeg","mladja4.jpeg",
+"mladja5.jpeg","mladja6.jpeg","mladja7.jpeg","mladja8.jpeg",
+"mladja9.jpeg","mladja10.jpeg"
 ],
 
-/* AP */
 [
-"ap1.jpeg",
-"ap2.jpeg",
-"ap3.jpeg"
+"ap1.jpeg","ap2.jpeg","ap3.jpeg"
 ],
 
-/* MILOS1 */
 [
-"b1.png",
-"b2.jepg",
-"b3.jepg",
-"b4.png",
-"b5.jpeg",
-"b6.png",
-"b77.jpeg",
-"b8.png",
-"b9.jpeg",
-"b10.png",
-"b11.png",
-"b12.png"
+"milos1/b1.jpg","milos1/b2.jpg","milos1/b3.jpg","milos1/b4.jpg",
+"milos1/b5.jpg","milos1/b6.jpg","milos1/b7.jpg","milos1/b8.jpg",
+"milos1/b9.jpg","milos1/b10.jpg","milos1/b11.jpg","milos1/b12.jpg"
 ],
 
-/* MILOS2 */
 [
-"c1.jpeg",
-"c2.jpeg",
-"c3.jpeg",
-"c4.jpeg",
-"c5.jpeg",
-"c6.jpeg",
-"c7.jpeg",
-"c8.jpeg",
-"c9.jpeg",
-"c10.jpeg"
-
+"milos2/c1.jpeg","milos2/c2.jpeg"
 ]
 
 ];
@@ -223,7 +258,6 @@ const sets = [
 let currentSet = 0;
 let currentIndex = 0;
 
-/* AUTO COVER */
 sets.forEach((set,index)=>{
     let coverIndex=0;
     const cover=document.getElementById("cover"+index);
@@ -252,13 +286,6 @@ function prevImg(){
     currentIndex=(currentIndex-1+sets[currentSet].length)%sets[currentSet].length;
     document.getElementById("lightbox-img").src=sets[currentSet][currentIndex];
 }
-
-document.addEventListener("keydown",function(e){
-    if(document.getElementById("lightbox").style.display==="flex"){
-        if(e.key==="ArrowRight") nextImg();
-        if(e.key==="ArrowLeft") prevImg();
-    }
-});
 
 </script>
 
